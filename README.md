@@ -2,28 +2,170 @@
 
 ![ATLAS](https://github.com/user-attachments/assets/9913a6a9-7e50-4fb0-83bd-979156db7ef7)
 
-ATLAS: Automated Threat Learning and Analysis System
 
-A comprehensive DevOps project integrating Wazuh, cloud-native tools, and machine learning for advanced security monitoring and automated incident response.
+# Automated Threat Learning and Analysis System
 
-In today's rapidly evolving threat landscape, organizations must proactively monitor, detect, and respond to security incidents to protect their critical assets and maintain business continuity.
+ATLAS is a comprehensive security monitoring and automated response platform that combines traditional security tools like Wazuh with advanced AI capabilities. This hybrid approach creates a powerful system that can automatically detect, analyze, and respond to security threats in real-time.
 
-The primary objective of this project is to design and implement a cloud-based security monitoring and data analysis platform that leverages the open-source Wazuh security tool and other cloud-native technologies. By centralizing and analyzing security-related logs and events, the platform will provide valuable insights into the organization's security posture, enabling data-driven decision-making and automated incident response.
+## Project Overview
 
-# **Project Objectives:**
+In today's rapidly evolving threat landscape, organizations must proactively monitor, detect, and respond to security incidents to protect their critical assets and maintain business continuity. ATLAS addresses this need by providing:
 
-1. **Cloud Infrastructure Setup**: Establish a secure and scalable cloud infrastructure to host the security monitoring and data analysis components.
-2. **Wazuh Security Monitoring**: Implement Wazuh, an open-source security platform, to collect, analyze, and store security-related logs and events.
-3. **Data Analysis and Visualization**: Develop data pipelines and analytical tools to extract insights from the security data, enabling a deeper understanding of security trends, patterns, and potential threats.
-4. **Automated Alarm Management**: Leverage machine learning techniques to create a system that can automatically suggest and potentially apply appropriate solutions for detected security alarms, reducing the manual effort required for incident response.
-5. **Documentation and Presentation**: Thoroughly document the project's architecture, implementation details, and the insights gained from the data analysis. Prepare a comprehensive presentation to showcase the project's outcomes and its potential impact on the organization's security posture.
+1. **Comprehensive Monitoring**: Traditional security monitoring with Wazuh for complete visibility
+2. **Intelligent Analysis**: ML-based analysis combined with LLM reasoning for deeper understanding
+3. **Automated Response**: Action recommendations and automated remediation capabilities
+4. **Scalable Architecture**: Cloud-native design that scales with your organization
 
-# **Expected Outcomes:**
+## Architecture
 
-Upon the successful completion of this project, any given organization will benefit from the following:
+ATLAS uses a hybrid architecture that combines proven security monitoring tools with cutting-edge AI technologies:
 
-1. Improved security monitoring and event detection capabilities through the integration of the Wazuh platform.
-2. Enhanced visibility and understanding of the organization's security landscape through comprehensive data analysis and visualization.
-3. Streamlined incident response processes through the implementation of an automated alarm management system, reducing the time and effort required to address security incidents.
-4. Increased security awareness and informed decision-making based on the insights gained from the project.
-5. A reusable and scalable cloud-based security monitoring and data analysis platform that can be further expanded and optimized over time.
+
+
+## Key Components
+
+### 1. Security Monitoring Infrastructure
+
+- **Wazuh Server**: Core HIDS/SIEM component for security monitoring
+- **Elasticsearch/Kibana**: Data storage and visualization platform
+- **Agents**: Lightweight monitors deployed on systems to collect security data
+
+### 2. AI Engine
+
+- **Foundation Models**: Integration with LLMs (local or API-based)
+- **Vector Database**: Semantic search for similar security incidents
+- **ML Pipeline**: Traditional machine learning for threat classification
+- **Agent Framework**: LangChain-based orchestration of intelligent agents
+
+### 3. Response System
+
+- **Automated Analysis**: Contextual understanding of security alerts
+- **Remediation Actions**: Automatic or recommended response actions
+- **Verification**: Confirmation of successful threat mitigation
+
+### 4. DevOps Interface
+
+- **Infrastructure as Code**: Terraform templates for AWS deployment
+- **Dashboard**: Web interface for security monitoring and configuration
+- **API**: RESTful API for integration with other systems
+- **CLI Tools**: Command-line tools for automation and management
+
+## Technical Implementation
+
+ATLAS is implemented using:
+
+- **AWS Cloud Infrastructure**: VPC, EC2, S3, IAM
+- **Wazuh**: Open-source security monitoring platform
+- **ELK Stack**: Elasticsearch, Logstash, Kibana for data analysis
+- **LangChain & Semantic Kernel**: Framework for creating AI agents
+- **Vector Database**: Chroma DB for similarity search
+- **Terraform**: Infrastructure as Code for AWS provisioning
+- **Python**: Core engine implementation
+
+## Deployment Options
+
+ATLAS can be deployed in two configurations:
+
+### Free Tier Compatible
+- Minimal setup suitable for AWS Free Tier
+- Core security monitoring with Wazuh
+- Limited AI capabilities
+- Perfect for demonstration purposes
+
+### Full Deployment
+- Complete system with all AI components
+- Vector database for similarity search
+- LLM integration for enhanced analysis
+- Automated response capabilities
+
+## Getting Started
+
+### Prerequisites
+
+- AWS account
+- Terraform installed
+- AWS CLI configured
+- Python 3.10+
+
+### Deployment
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/ATLAS.git
+   cd ATLAS
+   ```
+
+2. Make scripts executable:
+   ```bash
+   chmod +x scripts/*.sh
+   ```
+
+3. Deploy the system:
+   
+   For Free Tier compatible deployment:
+   ```bash
+   ./scripts/deploy.sh --free-tier
+   ```
+   
+   For full deployment with AI capabilities:
+   ```bash
+   ./scripts/deploy.sh --full
+   ```
+
+4. Follow the instructions in the generated DEPLOYMENT_INFO.md file to access the system.
+
+### Adding Agents
+
+To monitor additional systems:
+
+```bash
+scp -i ~/.ssh/atlas-key.pem scripts/deploy-agent.sh user@target-system:~/
+ssh -i ~/.ssh/atlas-key.pem user@target-system
+sudo ./deploy-agent.sh <wazuh-server-ip>
+```
+
+### Cleanup
+
+When you're done with your demo or testing:
+
+```bash
+./scripts/cleanup.sh
+```
+
+## Project Objectives
+
+1. **Cloud Infrastructure**: Establish a secure and scalable cloud infrastructure to host security monitoring and analysis components.
+2. **Security Monitoring**: Implement Wazuh to collect, analyze, and store security-related logs and events.
+3. **Data Analysis**: Develop data pipelines and analytical tools to extract insights from security data.
+4. **Automated Response**: Leverage machine learning and LLMs to suggest and apply appropriate solutions for detected security alerts.
+5. **Documentation**: Thoroughly document the architecture and implementation for educational purposes.
+
+## Repository Structure
+
+```
+atlas/
+├── terraform/                  # Infrastructure as Code
+│   ├── main.tf                 # Main AWS resources
+│   ├── variables.tf            # Input variables
+│   ├── outputs.tf              # Output values
+│   └── modules/                # Modular components
+├── scripts/                    # Installation and deployment scripts
+│   ├── install-wazuh.sh        # Wazuh installation script
+│   ├── install-ai-engine.sh    # AI engine installation script
+│   ├── deploy.sh               # Master deployment script
+│   └── cleanup.sh              # AWS cleanup script
+├── src/                        # Source code
+│   └── ai_engine/              # AI engine components
+├── docs/                       # Documentation
+└── README.md                   # Project overview
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Acknowledgments
+
+- Wazuh open-source security platform
+- LangChain framework for AI agent development
+- AWS for cloud infrastructure services
