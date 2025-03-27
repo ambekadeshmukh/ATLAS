@@ -20,6 +20,7 @@ In today's rapidly evolving threat landscape, organizations must proactively mon
 
 ATLAS uses a hybrid architecture that combines proven security monitoring tools with cutting-edge AI technologies:
 
+![ATLAS Design](https://github.com/user-attachments/assets/21371c75-4ced-4367-9fb6-299c8545c3bf)
 
 
 ## Key Components
